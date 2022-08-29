@@ -1,8 +1,5 @@
 package com.employees.details.entity;
 
-import com.employees.details.util.Gender;
-import com.employees.details.util.MaritalStatus;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

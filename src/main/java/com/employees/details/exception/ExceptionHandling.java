@@ -1,11 +1,9 @@
 package com.employees.details.exception;
 
-import com.employees.details.exception.ApplicationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import com.employees.details.exception.ErrorResponse;
 
 @ControllerAdvice
 public class ExceptionHandling {
