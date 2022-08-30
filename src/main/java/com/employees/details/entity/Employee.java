@@ -7,6 +7,7 @@ import java.util.Date;
 
 @Entity(name="EMPLOYEES")
 public class Employee {
+
     @Id
     @Column(name="EMPLOYEE_ID")
     private Integer employeeId;

@@ -24,6 +24,6 @@ public class ExceptionHandling {
 
     @ExceptionHandler(value = {Exception.class})
     protected ResponseEntity<Object> handleConflict(Exception ex) {
-        return new ResponseEntity<>(new ErrorResponse("Error" , "Something went wrong with the application. Please check the logs."), HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(new ErrorResponse("Generic Error" , "Something went wrong with the application. Please check the logs."), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
