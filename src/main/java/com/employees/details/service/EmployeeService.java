@@ -1,6 +1,6 @@
 package com.employees.details.service;
 
-import com.employees.details.entity.Employee;
+import com.employees.details.entity.EmployeeEntity;
 import com.employees.details.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,24 +14,24 @@ public class EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
-    public Optional<Employee> getEmployee(Integer empId) {
+    public Optional<EmployeeEntity> getEmployee(Integer empId) {
         return employeeRepository.findById(empId);
     }
 
-    public List<Employee> list() {
+    public List<EmployeeEntity> list() {
         return employeeRepository.findAll();
     }
 
-    public Employee addEmployee(Employee employee) {
-        return employeeRepository.saveAndFlush(employee);
+    public EmployeeEntity addEmployee(EmployeeEntity employeeEntity) {
+        return employeeRepository.saveAndFlush(employeeEntity);
     }
 
-    public Employee updateEmployee(Employee employee) {
-        return employeeRepository.saveAndFlush(employee);
+    public EmployeeEntity updateEmployee(EmployeeEntity employeeEntity) {
+        return employeeRepository.saveAndFlush(employeeEntity);
     }
 
-    public void deleteEmployee(Employee employee) {
-        employeeRepository.delete(employee);
+    public void deleteEmployee(EmployeeEntity employeeEntity) {
+        employeeRepository.delete(employeeEntity);
     }
 
     public void deleteByEmployeeId(Integer empId) {

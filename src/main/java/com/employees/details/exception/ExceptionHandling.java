@@ -17,9 +17,14 @@ public class ExceptionHandling {
         return new ResponseEntity<>(new ErrorResponse(applicationException), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @ExceptionHandler(value = {DataIntegrityViolationException.class, ConstraintViolationException.class, NoSuchElementException.class})
+    @ExceptionHandler(value = {DataIntegrityViolationException.class, ConstraintViolationException.class})
     protected ResponseEntity<Object> handleHibernateConflict() {
         return new ResponseEntity<>(new ErrorResponse("Database Error" , "Something wrong with the input data. Please provide the proper input."), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(value = {NoSuchElementException.class})
+    protected ResponseEntity<Object> handleNoElementConflict() {
+        return new ResponseEntity<>(new ErrorResponse("Error" , "No such element in database."), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(value = {Exception.class})
