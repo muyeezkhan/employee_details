@@ -34,10 +34,10 @@ public class AuthenticationFilter extends OncePerRequestFilter {
         logger.info("Entered into AuthenticationFilter and the request is {}.", request.getRequestURI());
         try {
             System.out.println("-----------Path-------------" + request.getRequestURI());
-            if (request.getRequestURI().contains("h2-console") || jwtAuthentication.getTokenPath().contains(request.getRequestURI())) {
+            if (request.getRequestURI().contains("h2-console") || request.getRequestURI().contains("/favicon.ico")) {
                 logger.info("Exiting AuthenticationFilter and the request is {}.", request.getRequestURI());
                 filterChain.doFilter(request, response);
-            } else if (!jwtAuthentication.getTokenPath().contains(request.getRequestURI())) {
+            } else {
                 String token = request.getHeader("jwt-token");
                 if (token.isBlank() || token.isEmpty() || !jwtAuthentication.authenticate(token)) {
                     throw new ApplicationException("Authentication Error", "Token is invalid or maybe expired");
@@ -47,8 +47,14 @@ public class AuthenticationFilter extends OncePerRequestFilter {
                 filterChain.doFilter(request, response);
             }
         } catch (ApplicationException ex) {
-
             ErrorResponse errorResponse = new ErrorResponse(ex);
+            response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
+            response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+            ObjectMapper mapper = new ObjectMapper();
+            logger.error("Authentication failed due to {}.", mapper.writeValueAsString(errorResponse));
+            mapper.writeValue(response.getWriter(), errorResponse);
+        }  catch (Exception ex) {
+            ErrorResponse errorResponse = new ErrorResponse("Internal Server error", "Something went wrong. Please check the logs.");
             response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
             response.setContentType(MediaType.APPLICATION_JSON_VALUE);
             ObjectMapper mapper = new ObjectMapper();

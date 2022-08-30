@@ -2,14 +2,12 @@ package com.employees.details.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.util.Date;
 
 @Entity(name="EMPLOYEES")
-public class EmployeeDetails {
+public class Employee {
     @Id
-    @GeneratedValue
     @Column(name="EMPLOYEE_ID")
     private Integer employeeId;
 
